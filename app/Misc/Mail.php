@@ -177,6 +177,7 @@ class Mail
                     \Config::set('mail.username', $mailbox->email);
                     \Config::set('mail.password', $mailbox->oauthGetParam('a_token'));
                 } else {
+                    \Config::set('mail.auth_mode', null);
                     if (!$mailbox->out_username) {
                         \Config::set('mail.username', null);
                         \Config::set('mail.password', null);
@@ -239,6 +240,7 @@ class Mail
 
         // SMTP
         if (\Config::get('mail.driver') == self::MAIL_DRIVER_SMTP) {
+            \Config::set('mail.auth_mode', null);
             \Config::set('mail.host', Option::get('mail_host'));
             \Config::set('mail.port', Option::get('mail_port'));
             if (!Option::get('mail_username')) {
